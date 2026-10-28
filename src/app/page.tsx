@@ -1,9 +1,14 @@
 import Link from "next/link";
 import { HeroVisual } from "@/components/hero-visual";
+import { PairMatch } from "@/components/pair-match";
 import {
   BoltIcon,
   ChatAlertIcon,
   DnaIcon,
+  FemaleIcon,
+  HeartIcon,
+  MaleIcon,
+  MapPinIcon,
   NetworkIcon,
   PawIcon,
   RadarIcon,
@@ -32,8 +37,8 @@ const breederSteps = [
     body: "Every request arrives with a complete application from a buyer who activated. Accept or decline in one tap.",
   },
   {
-    title: "Network with breeders",
-    body: "Swipe in Network mode for stud service, co-ownership, mentorship, new bloodlines, or referrals.",
+    title: "Match stud & dam",
+    body: "Find the right breeding pair — plus co-ownership, mentorship, new bloodlines, and referrals — in Network mode.",
   },
   {
     title: "Refer when you're full",
@@ -126,6 +131,46 @@ export default function Home() {
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           <StepCard heading="For puppy buyers" accent="accent" steps={buyerSteps} />
           <StepCard heading="For breeders" accent="cyan" icon={NetworkIcon} steps={breederSteps} />
+        </div>
+      </section>
+
+      {/* ---------- STUD & DAM MATCHING ---------- */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <div className="glass ring-grad relative overflow-hidden rounded-[2.5rem] p-6 sm:p-10">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-violet/20 blur-[100px]"
+          />
+          <div className="relative grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+            <div>
+              <SectionLabel icon={HeartIcon}>Stud &amp; dam matching</SectionLabel>
+              <h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl">
+                The right pairing, <span className="neon">without the guesswork.</span>
+              </h2>
+              <p className="mt-4 text-muted">
+                A dedicated mode for breeders raising a litter. Line up a stud and a dam by breed and
+                bloodline, see health clearances and coefficient of inbreeding up front, and message
+                once both sides swipe right. Stud fees and contracts are always arranged privately,
+                off the platform.
+              </p>
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                {[
+                  { icon: MaleIcon, text: "List a stud or search for one" },
+                  { icon: FemaleIcon, text: "List a dam or find the right match" },
+                  { icon: DnaIcon, text: "Filter by health testing & COI" },
+                  { icon: MapPinIcon, text: "Match by breed, lines & distance" },
+                ].map((f) => (
+                  <li key={f.text} className="flex items-center gap-3 text-sm">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/5 text-accent ring-1 ring-white/10">
+                      <f.icon className="h-4.5 w-4.5" />
+                    </span>
+                    {f.text}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <PairMatch />
+          </div>
         </div>
       </section>
 

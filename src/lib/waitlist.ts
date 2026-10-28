@@ -1,9 +1,16 @@
 export const NETWORK_INTERESTS = [
-  "Stud service",
   "Co-ownership",
   "Mentorship",
   "New bloodlines",
   "Puppy referrals",
+] as const;
+
+// Stud & dam (bitch) matching intent for breeders.
+export const BREEDING_INTERESTS = [
+  "I have a stud (male) available",
+  "I have a dam (female) to breed",
+  "Looking for a stud",
+  "Looking for a dam",
 ] as const;
 
 export const TIMELINES = ["asap", "3-6 months", "6-12 months", "just researching"] as const;
@@ -19,6 +26,7 @@ export type WaitlistEntry = {
   years_breeding: number | null;
   timeline: (typeof TIMELINES)[number] | null;
   network_interests: string[];
+  breeding_interests: string[];
   notes: string | null;
 };
 
@@ -59,6 +67,12 @@ export function parseWaitlistEntry(input: Record<string, unknown>): WaitlistEntr
       )
     : [];
 
+  const breeding = Array.isArray(input.breeding_interests)
+    ? input.breeding_interests.filter((i): i is string =>
+        BREEDING_INTERESTS.includes(i as (typeof BREEDING_INTERESTS)[number]),
+      )
+    : [];
+
   return {
     role,
     name,
@@ -70,6 +84,7 @@ export function parseWaitlistEntry(input: Record<string, unknown>): WaitlistEntr
     years_breeding: years,
     timeline,
     network_interests: role === "breeder" ? interests : [],
+    breeding_interests: role === "breeder" ? breeding : [],
     notes: text(input.notes, 1000),
   };
 }

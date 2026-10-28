@@ -103,6 +103,24 @@ export function SparkIcon(props: IconProps) {
   );
 }
 
+export function MaleIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="10" cy="14" r="5.5" />
+      <path d="M14.5 9.5 20 4M15 4h5v5" />
+    </svg>
+  );
+}
+
+export function FemaleIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="9" r="5.5" />
+      <path d="M12 14.5V21M9 18h6" />
+    </svg>
+  );
+}
+
 export function NetworkIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>

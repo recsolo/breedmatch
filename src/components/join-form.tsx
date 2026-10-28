@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { HeartIcon, PawIcon } from "@/components/icons";
-import { NETWORK_INTERESTS, TIMELINES } from "@/lib/waitlist";
+import { BREEDING_INTERESTS, NETWORK_INTERESTS, TIMELINES } from "@/lib/waitlist";
 
 type Role = "breeder" | "buyer";
 type Status = { state: "idle" } | { state: "sending" } | { state: "done" } | { state: "error"; message: string };
@@ -124,6 +124,21 @@ export function JoinForm({ initialRole }: { initialRole: Role }) {
             Website or social page <span className="font-normal text-muted">(optional)</span>
             <input name="website" maxLength={300} placeholder="https://" className={inputClass} />
           </label>
+          <fieldset>
+            <legend className="text-sm font-medium">Stud &amp; dam matching</legend>
+            <p className="mt-1 text-xs text-muted">Tell us what you&apos;re breeding for (optional).</p>
+            <div className="mt-2.5 flex flex-wrap gap-2">
+              {BREEDING_INTERESTS.map((interest) => (
+                <label
+                  key={interest}
+                  className="chip flex cursor-pointer items-center gap-2 rounded-full px-3 py-1.5 text-sm transition has-[:checked]:border-accent/60 has-[:checked]:text-accent"
+                >
+                  <input type="checkbox" name="breeding_interests" value={interest} className="accent-accent" />
+                  {interest}
+                </label>
+              ))}
+            </div>
+          </fieldset>
           <fieldset>
             <legend className="text-sm font-medium">Open to networking for…</legend>
             <div className="mt-2.5 flex flex-wrap gap-2">

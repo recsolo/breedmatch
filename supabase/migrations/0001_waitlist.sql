@@ -15,6 +15,7 @@ create table public.waitlist (
   years_breeding int check (years_breeding between 0 and 80),
   timeline text check (timeline in ('asap', '3-6 months', '6-12 months', 'just researching')),
   network_interests text[] not null default '{}',
+  breeding_interests text[] not null default '{}',
   notes text check (char_length(notes) <= 1000)
 );
 
