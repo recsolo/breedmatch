@@ -1,28 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbf7f1;
+  --background: #fbf6ee;
   --surface: #ffffff;
-  --foreground: #1f1a16;
-  --muted: #6b6159;
-  --border: #e7ddd1;
-  --accent: #b5522b;
-  --accent-strong: #933f1f;
-  --accent-soft: #f6e4d9;
-  --forest: #2f4a3a;
+  --surface-2: #fdf0e6;
+  --foreground: #211a14;
+  --muted: #6d6258;
+  --border: #ece1d2;
+  --accent: #c2531f;
+  --accent-strong: #9c3f14;
+  --accent-soft: #fbe5d6;
+  --amber: #e5a21e;
+  --forest: #2c4a39;
+  --forest-soft: #e4ede6;
+  --shadow-card: 0 18px 40px -18px rgba(70, 40, 20, 0.35);
+  --shadow-soft: 0 10px 30px -16px rgba(70, 40, 20, 0.25);
   color-scheme: light;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-soft: var(--accent-soft);
+  --color-amber: var(--amber);
   --color-forest: var(--forest);
+  --color-forest-soft: var(--forest-soft);
   --font-sans: var(--font-geist-sans);
   --font-display: var(--font-fraunces);
 }
@@ -31,21 +39,59 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+/* Warm radial glow behind the hero. */
+.hero-glow {
+  background:
+    radial-gradient(60% 55% at 15% 10%, rgba(229, 162, 30, 0.18), transparent 60%),
+    radial-gradient(55% 60% at 95% 20%, rgba(194, 83, 31, 0.16), transparent 55%);
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, var(--accent-strong), var(--accent) 45%, var(--amber));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-accent {
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 10px 22px -10px rgba(194, 83, 31, 0.7);
+}
+.btn-accent:hover {
+  filter: brightness(1.05);
+}
+
+/* Floating swipe-card stack. */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-10px) rotate(var(--r, 0deg)); }
+}
+.floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .floaty { animation: none; }
 }
 
 .prose-legal h2 {
   font-family: var(--font-fraunces), serif;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   margin-top: 2rem;
   margin-bottom: 0.5rem;
+  color: var(--foreground);
 }
-
 .prose-legal p,
 .prose-legal li {
   color: var(--muted);
-  line-height: 1.7;
+  line-height: 1.75;
 }
-
 .prose-legal ul {
   list-style: disc;
   padding-left: 1.25rem;

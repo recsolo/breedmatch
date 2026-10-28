@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PawIcon } from "@/components/icons";
 
 const links = [
   { href: "/#how-it-works", label: "How it works" },
@@ -8,10 +9,13 @@ const links = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-20 border-b border-border bg-background/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-        <Link href="/" className="font-display text-xl font-semibold tracking-tight">
-          Breed<span className="text-accent">Match</span>
+        <Link href="/" className="flex items-center gap-2 font-display text-xl font-semibold tracking-tight">
+          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-white">
+            <PawIcon className="h-4 w-4" />
+          </span>
+          Breed<span className="-ml-1.5 text-accent">Match</span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-muted sm:flex">
           {links.map((link) => (
@@ -22,7 +26,7 @@ export function SiteHeader() {
         </nav>
         <Link
           href="/join"
-          className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-strong"
+          className="btn-accent rounded-full px-4 py-2 text-sm font-semibold text-white"
         >
           Join early
         </Link>
