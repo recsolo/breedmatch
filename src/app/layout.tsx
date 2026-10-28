@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
-import { Fraunces, Geist } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const display = Space_Grotesk({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const body = Inter({
+  variable: "--font-body",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "BreedMatch — Connect with responsible dog breeders",
+  title: "BreedMatch — Swipe. Match. Meet your breeder.",
   description:
-    "Swipe, match, and message with dog breeders. One reusable puppy application, verified kennels, and breeder-to-breeder networking. Connection platform only.",
+    "The high-tech way to connect puppy buyers with responsible dog breeders. One reusable application, verified kennels, and breeder-to-breeder networking. Connection platform only.",
 };
 
 export default function RootLayout({
@@ -27,7 +28,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${fraunces.variable} antialiased`}>
+      <body className={`${display.variable} ${body.variable} antialiased`}>
+        <div className="bg-fx" aria-hidden />
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />

@@ -3,8 +3,6 @@ import type { SVGProps } from "react";
 type IconProps = SVGProps<SVGSVGElement>;
 
 const base = {
-  width: 24,
-  height: 24,
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
@@ -16,10 +14,10 @@ const base = {
 export function PawIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>
-      <circle cx="5.5" cy="10.5" r="1.8" />
-      <circle cx="9.5" cy="6.5" r="1.8" />
-      <circle cx="14.5" cy="6.5" r="1.8" />
-      <circle cx="18.5" cy="10.5" r="1.8" />
+      <circle cx="5.5" cy="10.5" r="1.7" />
+      <circle cx="9.5" cy="6.5" r="1.7" />
+      <circle cx="14.5" cy="6.5" r="1.7" />
+      <circle cx="18.5" cy="10.5" r="1.7" />
       <path d="M12 11c-2.5 0-4.5 1.8-5 4-.4 1.8 1 3 2.6 3 1 0 1.6-.5 2.4-.5s1.4.5 2.4.5c1.6 0 3-1.2 2.6-3-.5-2.2-2.5-4-5-4Z" />
     </svg>
   );
@@ -43,6 +41,17 @@ export function DnaIcon(props: IconProps) {
   );
 }
 
+export function RadarIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <path d="M12 12 19 7" />
+      <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 export function ChatAlertIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>
@@ -53,10 +62,10 @@ export function ChatAlertIcon(props: IconProps) {
   );
 }
 
-export function FlagIcon(props: IconProps) {
+export function BoltIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>
-      <path d="M5 21V4M5 4h11l-2 3 2 3H5" />
+      <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
     </svg>
   );
 }
@@ -89,13 +98,24 @@ export function XMarkIcon(props: IconProps) {
 export function SparkIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>
-      <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18" />
+      <path d="M12 3c.6 4.3 2.7 6.4 7 7-4.3.6-6.4 2.7-7 7-.6-4.3-2.7-6.4-7-7 4.3-.6 6.4-2.7 7-7Z" />
     </svg>
   );
 }
 
-/** Friendly illustrated dog head. `tone` picks a coat color. */
-export function DogAvatar({
+export function NetworkIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="5" r="2.2" />
+      <circle cx="5" cy="18" r="2.2" />
+      <circle cx="19" cy="18" r="2.2" />
+      <path d="M12 7.2 6.5 16M12 7.2 17.5 16M7.2 18h9.6" />
+    </svg>
+  );
+}
+
+/** Dog portrait styled for the dark/neon theme. */
+export function DogPortrait({
   tone = "golden",
   className,
 }: {
@@ -104,34 +124,57 @@ export function DogAvatar({
 }) {
   const c =
     tone === "choco"
-      ? { a: "#8a5a3b", b: "#6f452c", ear: "#563620" }
+      ? { a: "#9b6239", b: "#7a4a2b", ear: "#5e3920" }
       : tone === "slate"
-        ? { a: "#9298a1", b: "#737984", ear: "#565b63" }
-        : { a: "#e7a94e", b: "#d1902f", ear: "#b9771f" };
+        ? { a: "#9aa0ad", b: "#787e8b", ear: "#5c616c" }
+        : { a: "#f0ad4e", b: "#d68f2c", ear: "#b9751d" };
+  const uid = `dog-${tone}`;
   return (
     <svg viewBox="0 0 200 200" className={className} role="img" aria-label="Illustrated dog">
       <defs>
-        <radialGradient id={`sky-${tone}`} cx="50%" cy="30%" r="80%">
-          <stop offset="0%" stopColor="#fff4e6" />
-          <stop offset="100%" stopColor="#fbe4cf" />
+        <radialGradient id={`bg-${uid}`} cx="50%" cy="28%" r="85%">
+          <stop offset="0%" stopColor="#2a1c40" />
+          <stop offset="60%" stopColor="#170f2a" />
+          <stop offset="100%" stopColor="#0d0820" />
         </radialGradient>
+        <linearGradient id={`rim-${uid}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#ff6a3d" />
+          <stop offset="50%" stopColor="#ff3d8b" />
+          <stop offset="100%" stopColor="#a855f7" />
+        </linearGradient>
       </defs>
-      <rect width="200" height="200" fill={`url(#sky-${tone})`} />
+      <rect width="200" height="200" fill={`url(#bg-${uid})`} />
+      {/* soft glow behind head */}
+      <circle cx="100" cy="104" r="62" fill={`url(#rim-${uid})`} opacity="0.18" />
       {/* ears */}
       <path d="M52 70c-16-6-28 6-26 26 2 18 16 26 28 22Z" fill={c.ear} />
       <path d="M148 70c16-6 28 6 26 26-2 18-16 26-28 22Z" fill={c.ear} />
       {/* head */}
       <path d="M100 48c30 0 50 22 50 52 0 32-24 52-50 52S50 132 50 100c0-30 20-52 50-52Z" fill={c.a} />
-      <path d="M100 78c18 0 30 14 30 34 0 22-14 36-30 36s-30-14-30-36c0-20 12-34 30-34Z" fill="#fff6ec" />
+      <path d="M100 78c18 0 30 14 30 34 0 22-14 36-30 36s-30-14-30-36c0-20 12-34 30-34Z" fill="#fdf4e6" />
       {/* eyes */}
-      <circle cx="84" cy="98" r="7" fill="#2a1d13" />
-      <circle cx="116" cy="98" r="7" fill="#2a1d13" />
+      <circle cx="84" cy="98" r="7" fill="#20141f" />
+      <circle cx="116" cy="98" r="7" fill="#20141f" />
       <circle cx="86" cy="96" r="2.2" fill="#fff" />
       <circle cx="118" cy="96" r="2.2" fill="#fff" />
       {/* snout */}
       <ellipse cx="100" cy="122" rx="16" ry="12" fill={c.b} />
-      <ellipse cx="100" cy="116" rx="7" ry="5.5" fill="#2a1d13" />
-      <path d="M100 121v10M100 131c-4 0-7-2-8-5M100 131c4 0 7-2 8-5" stroke="#2a1d13" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <ellipse cx="100" cy="116" rx="7" ry="5.5" fill="#20141f" />
+      <path
+        d="M100 121v10M100 131c-4 0-7-2-8-5M100 131c4 0 7-2 8-5"
+        stroke="#20141f"
+        strokeWidth="3"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* neon rim light */}
+      <path
+        d="M100 48c30 0 50 22 50 52 0 32-24 52-50 52"
+        fill="none"
+        stroke={`url(#rim-${uid})`}
+        strokeWidth="3"
+        opacity="0.9"
+      />
     </svg>
   );
 }

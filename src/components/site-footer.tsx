@@ -1,12 +1,21 @@
 import Link from "next/link";
+import { PawIcon } from "@/components/icons";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 text-sm text-muted sm:flex-row sm:justify-between">
+    <footer className="mt-24 border-t border-white/5">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-12 text-sm text-muted sm:flex-row sm:justify-between">
         <div className="max-w-md">
-          <p className="font-display text-base text-foreground">BreedMatch</p>
-          <p className="mt-2">
+          <div className="flex items-center gap-2 font-display text-base font-semibold text-foreground">
+            <span
+              className="flex h-6 w-6 items-center justify-center rounded-lg text-white"
+              style={{ background: "var(--grad)" }}
+            >
+              <PawIcon className="h-3.5 w-3.5" />
+            </span>
+            BreedMatch
+          </div>
+          <p className="mt-3">
             A connection platform only. We don&apos;t sell dogs, process animal payments, hold
             deposits, or take part in private agreements between users.
           </p>

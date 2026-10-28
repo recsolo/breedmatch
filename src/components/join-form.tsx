@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { HeartIcon, PawIcon } from "@/components/icons";
 import { NETWORK_INTERESTS, TIMELINES } from "@/lib/waitlist";
 
 type Role = "breeder" | "buyer";
 type Status = { state: "idle" } | { state: "sending" } | { state: "done" } | { state: "error"; message: string };
 
 const inputClass =
-  "mt-1 w-full rounded-xl border border-border bg-surface px-3 py-2.5 outline-none focus:border-accent";
+  "mt-1.5 w-full rounded-xl border border-white/12 bg-white/5 px-3.5 py-2.5 text-foreground outline-none transition placeholder:text-muted/60 focus:border-accent/60 focus:bg-white/8 focus:ring-2 focus:ring-accent/25";
 
 export function JoinForm({ initialRole }: { initialRole: Role }) {
   const [role, setRole] = useState<Role>(initialRole);
@@ -42,31 +43,37 @@ export function JoinForm({ initialRole }: { initialRole: Role }) {
 
   if (status.state === "done") {
     return (
-      <div className="mt-10 rounded-2xl border border-border bg-surface p-8 text-center">
-        <p className="font-display text-2xl font-semibold">You&apos;re on the list.</p>
+      <div className="ring-grad glass mt-10 rounded-3xl p-10 text-center">
+        <span
+          className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl text-white"
+          style={{ background: "var(--grad)", boxShadow: "0 0 30px -6px rgba(255,61,139,0.7)" }}
+        >
+          <HeartIcon className="h-7 w-7" fill="currentColor" stroke="none" />
+        </span>
+        <p className="mt-5 font-display text-2xl font-bold">You&apos;re on the list.</p>
         <p className="mt-2 text-muted">
           {role === "breeder"
             ? "Your founding spot is saved. We'll email you when it's time to build your kennel profile."
-            : "We'll email you as soon as breeders near you are live."}
+            : "We'll email you the moment breeders near you go live."}
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-10 space-y-5">
-      <div className="grid grid-cols-2 gap-2 rounded-full border border-border bg-surface p-1">
+    <form onSubmit={handleSubmit} className="glass mt-10 space-y-5 rounded-3xl p-6 sm:p-8">
+      <div className="grid grid-cols-2 gap-2 rounded-full border border-white/10 bg-white/5 p-1">
         {(["breeder", "buyer"] as const).map((r) => (
           <button
             key={r}
             type="button"
             onClick={() => setRole(r)}
             aria-pressed={role === r}
-            className={`rounded-full py-2 text-sm font-medium ${
-              role === r ? "bg-accent text-white" : "text-muted hover:text-foreground"
+            className={`rounded-full py-2.5 text-sm font-semibold transition ${
+              role === r ? "btn-3d" : "text-muted hover:text-foreground"
             }`}
           >
-            {r === "breeder" ? "I'm a breeder" : "I'm looking for a puppy"}
+            {r === "breeder" ? "I'm a breeder" : "Looking for a puppy"}
           </button>
         ))}
       </div>
@@ -96,7 +103,7 @@ export function JoinForm({ initialRole }: { initialRole: Role }) {
           />
         </label>
         <label className="block text-sm font-medium">
-          {role === "breeder" ? "Breed(s) you raise" : "Breed(s) you're interested in"}
+          {role === "breeder" ? "Breed(s) you raise" : "Breed(s) you want"}
           <input name="breeds" required maxLength={300} placeholder="e.g. Golden Retriever" className={inputClass} />
         </label>
       </div>
@@ -119,11 +126,11 @@ export function JoinForm({ initialRole }: { initialRole: Role }) {
           </label>
           <fieldset>
             <legend className="text-sm font-medium">Open to networking for…</legend>
-            <div className="mt-2 flex flex-wrap gap-2">
+            <div className="mt-2.5 flex flex-wrap gap-2">
               {NETWORK_INTERESTS.map((interest) => (
                 <label
                   key={interest}
-                  className="flex cursor-pointer items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-sm has-[:checked]:border-accent has-[:checked]:bg-accent-soft"
+                  className="chip flex cursor-pointer items-center gap-2 rounded-full px-3 py-1.5 text-sm transition has-[:checked]:border-accent/60 has-[:checked]:text-accent"
                 >
                   <input type="checkbox" name="network_interests" value={interest} className="accent-accent" />
                   {interest}
@@ -137,7 +144,7 @@ export function JoinForm({ initialRole }: { initialRole: Role }) {
           When are you hoping to bring a puppy home?
           <select name="timeline" defaultValue="3-6 months" className={inputClass}>
             {TIMELINES.map((t) => (
-              <option key={t} value={t}>
+              <option key={t} value={t} className="bg-surface">
                 {t === "asap" ? "As soon as possible" : t === "just researching" ? "Just researching" : t}
               </option>
             ))}
@@ -160,16 +167,13 @@ export function JoinForm({ initialRole }: { initialRole: Role }) {
       />
 
       {status.state === "error" && (
-        <p role="alert" className="rounded-xl bg-accent-soft px-4 py-3 text-sm text-accent-strong">
+        <p role="alert" className="rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 text-sm text-accent">
           {status.message}
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={status.state === "sending"}
-        className="w-full rounded-full bg-accent py-3 font-medium text-white hover:bg-accent-strong disabled:opacity-60"
-      >
+      <button type="submit" disabled={status.state === "sending"} className="btn-3d w-full py-4 text-base disabled:opacity-60">
+        <PawIcon className="h-5 w-5" />
         {status.state === "sending"
           ? "Saving…"
           : role === "breeder"
@@ -177,7 +181,7 @@ export function JoinForm({ initialRole }: { initialRole: Role }) {
             : "Join the buyer waitlist"}
       </button>
       <p className="text-center text-xs text-muted">
-        BreedMatch is a connection platform only. No payment is collected to join the waitlist.
+        Connection platform only. No payment is collected to join the waitlist.
       </p>
     </form>
   );
