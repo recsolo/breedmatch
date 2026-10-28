@@ -1,103 +1,155 @@
-import Image from "next/image";
+import Link from "next/link";
+
+const buyerSteps = [
+  {
+    title: "Fill out one application",
+    body: "Your home, yard, experience, and timeline — once. No more retyping the same puppy application for every kennel.",
+  },
+  {
+    title: "Swipe breeders near you",
+    body: "Filter by breed and distance. See health testing, availability, and verified-kennel badges up front.",
+  },
+  {
+    title: "Get accepted, start talking",
+    body: "Swipe right to send your application. When a breeder accepts, the chat opens.",
+  },
+];
+
+const breederSteps = [
+  {
+    title: "Screen buyers, not tire-kickers",
+    body: "Every request arrives with a complete application from a buyer who paid to activate. Accept or decline in one tap.",
+  },
+  {
+    title: "Network with other breeders",
+    body: "Swipe in Network mode for stud service, co-ownership, mentorship, new bloodlines, or puppy referrals.",
+  },
+  {
+    title: "Refer when you're full",
+    body: "Waitlist packed? Pass a great buyer to a breeder you trust. Good homes don't get lost.",
+  },
+];
+
+const trust = [
+  {
+    title: "Verified Kennel badge",
+    body: "Breeders submit a registration, kennel license, or vet reference and we review it by hand.",
+  },
+  {
+    title: "Structured health testing",
+    body: "OFA, PennHIP, Embark, and more shown as clear checkmarks — not buried in a bio.",
+  },
+  {
+    title: "Scam tripwires in chat",
+    body: "Mention Zelle, gift cards, or a shipping fee before a visit and we flag a safety notice in the conversation.",
+  },
+  {
+    title: "Report & block everywhere",
+    body: "On every profile and every thread, reviewed by a real person.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      <section className="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-24">
+        <div className="max-w-3xl">
+          <p className="inline-block rounded-full bg-accent-soft px-3 py-1 text-sm text-accent-strong">
+            Launching in Indiana &amp; the Midwest
+          </p>
+          <h1 className="mt-6 font-display text-4xl leading-tight font-semibold sm:text-6xl">
+            Find the right breeder. Let the right breeder find you.
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg text-muted">
+            BreedMatch is a swipe-to-connect app for puppy buyers and responsible dog breeders.
+            One reusable application, verified kennels, and breeder-to-breeder networking — no
+            puppy sales, deposits, or middlemen.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/join?role=breeder"
+              className="rounded-full bg-accent px-6 py-3 text-center font-medium text-white hover:bg-accent-strong"
+            >
+              I&apos;m a breeder — claim a founding spot
+            </Link>
+            <Link
+              href="/join?role=buyer"
+              className="rounded-full border border-border bg-surface px-6 py-3 text-center font-medium hover:border-foreground"
+            >
+              I&apos;m looking for a puppy
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      <section id="how-it-works" className="border-y border-border bg-surface">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 md:grid-cols-2">
+          <StepList heading="For puppy buyers" steps={buyerSteps} />
+          <StepList heading="For breeders" steps={breederSteps} />
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-20">
+        <h2 className="font-display text-3xl font-semibold">Built for trust from day one</h2>
+        <p className="mt-3 max-w-2xl text-muted">
+          Puppy scams are everywhere. BreedMatch is designed so the real breeders stand out.
+        </p>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {trust.map((item) => (
+            <div key={item.title} className="rounded-2xl border border-border bg-surface p-5">
+              <h3 className="font-medium">{item.title}</h3>
+              <p className="mt-2 text-sm text-muted">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4">
+        <div className="rounded-3xl bg-forest px-6 py-12 text-white sm:px-12">
+          <p className="text-sm tracking-wide text-white/70 uppercase">Founding Breeder program</p>
+          <h2 className="mt-3 font-display text-3xl font-semibold sm:text-4xl">
+            The first 200 breeders get 90 days free.
+          </h2>
+          <p className="mt-4 max-w-2xl text-white/80">
+            Build your kennel profile now, before buyers arrive. Founding breeders are first in the
+            swipe deck at launch and keep access to the $150 lifetime plan — it won&apos;t be
+            offered after the founding window closes.
+          </p>
+          <Link
+            href="/join?role=breeder"
+            className="mt-8 inline-block rounded-full bg-white px-6 py-3 font-medium text-forest hover:bg-accent-soft"
+          >
+            Claim a founding spot
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function StepList({
+  heading,
+  steps,
+}: {
+  heading: string;
+  steps: { title: string; body: string }[];
+}) {
+  return (
+    <div>
+      <h2 className="font-display text-2xl font-semibold">{heading}</h2>
+      <ol className="mt-6 space-y-6">
+        {steps.map((step, i) => (
+          <li key={step.title} className="flex gap-4">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-sm font-semibold text-accent-strong">
+              {i + 1}
+            </span>
+            <div>
+              <h3 className="font-medium">{step.title}</h3>
+              <p className="mt-1 text-muted">{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }
